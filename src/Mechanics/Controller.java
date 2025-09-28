@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Controller {
-    boolean gameOver;
-    List<Player> players;
-    Board board;
-    Scanner input;
+    private boolean gameOver;
+    private List<Player> players;
+    private Board board;
+    private Scanner input;
 
 
     public Controller() {

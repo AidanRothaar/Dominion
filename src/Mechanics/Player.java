@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    String name;
+    private String name;
     int actions;
     int buys;
     int coins;
-    List<Integer> attacks;
-    List <Card> hand;
-    List <Card> deck;
-    List <Card> discard;
+    private List<Integer> attacks;
+    private List <Card> hand;
+    private List <Card> deck;
+    private List <Card> discard;
 
     
 
@@ -24,8 +24,16 @@ public class Player {
     }
 
     public void resolveAttacks() {
-        for (int i : attacks) {
-            doImpact(i);
+        boolean moat = false;
+        for(Card c : hand){
+            if (c.getName() == "Moat") {
+                moat = true;
+            }
+        }
+        if (moat == false) {
+            for (int i : attacks) {
+                doImpact(i);
+            }
         }
     }
 

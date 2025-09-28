@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;    
 
 public class Board {
-    List<Pile> cards;
+    private List<Pile> cards;
 
     public Board() {
         List<Integer> cardOptions = new ArrayList<>();

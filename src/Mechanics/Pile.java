@@ -1,8 +1,8 @@
 package Mechanics;
 
 public class Pile {
-    int cardType;
-    int numLeft;
+    private int cardType;
+    private int numLeft;
 
     public Pile(int type, int num) {
         cardType = type;

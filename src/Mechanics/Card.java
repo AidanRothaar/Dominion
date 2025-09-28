@@ -1,16 +1,17 @@
 package Mechanics;
 
 public class Card {
-    String name;
-    int type;
+    private String name;
+    private int type;
     // 1 = treasure
     // 2 = victory
     // 3 = action
-    int draw;
-    int actions;
-    int coins;
-    int victory;
-    boolean specialEffect;
+    private int draw;
+    private int actions;
+    private int coins;
+    private int cost;
+    private int victory;
+    private boolean specialEffect;
 
     public Card(int i) {
         switch(i) {
@@ -20,6 +21,7 @@ public class Card {
                 draw = 0;
                 actions = 0;
                 coins = 1;
+                cost = 0;
                 victory = 0;
                 specialEffect = false;
                 break;
@@ -29,6 +31,7 @@ public class Card {
                 draw = 0;
                 actions = 0;
                 coins = 2;
+                cost = 3;
                 victory = 0;
                 specialEffect = false;
                 break;
@@ -38,6 +41,7 @@ public class Card {
                 draw = 0;
                 actions = 0;
                 coins = 3;
+                cost = 6;
                 victory = 0;
                 specialEffect = false;
                 break;
@@ -47,6 +51,7 @@ public class Card {
                 draw = 0;
                 actions = 0;
                 coins = 0;
+                cost = 2;
                 victory = 1;
                 specialEffect = false;
                 break;
@@ -56,6 +61,7 @@ public class Card {
                 draw = 0;
                 actions = 0;
                 coins = 0;
+                cost = 5;
                 victory = 3;
                 specialEffect = false;
                 break;
@@ -65,6 +71,7 @@ public class Card {
                 draw = 0;
                 actions = 0;
                 coins = 0;
+                cost = 8;
                 victory = 6;
                 specialEffect = false;
                 break;
@@ -77,7 +84,39 @@ public class Card {
                 victory = -1;
                 specialEffect = false;
                 break;
+            case 8:
+                name = "Cellar";
+                type = 3;
+                draw = 0;
+                actions = 1;
+                coins = 0;
+                victory = 0;
+                specialEffect = true;
+                break;
+            case 9:
+                name = "Chapel";
+                type = 3;
+                draw = 0;
+                actions = 0;
+                coins = 0;
+                victory = 0;
+                specialEffect = true;
+                break;
+            case 10:
+                name = "Moat";
+                type = 3;
+                draw = 0;
+                actions = 1;
+                coins = 0;
+                victory = 0;
+                specialEffect = false; // Will be implemented in resolveAttacks
+                break;
                 
         }
+    }
+
+    public String getName() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getName'");
     }
 }
