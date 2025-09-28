@@ -38,8 +38,8 @@ public class Controller {
         players = new ArrayList<>();
         boolean cont = true;
         for (int i = 0; i < numPlayers; i++) {
-            System.out.println("Input player name");
-            players.add(new Player(input.nextLine(), board));
+            String name = "Player " + (i+1);
+            players.add(new Player(name, board));
         }
         input.close();
        
