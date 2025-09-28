@@ -111,12 +111,12 @@ public class Card {
                 victory = 0;
                 specialEffect = false; // Will be implemented in resolveAttacks
                 break;
+            //TODO add other cards
                 
         }
     }
 
     public String getName() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getName'");
+        return name;
     }
 }

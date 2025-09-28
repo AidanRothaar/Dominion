@@ -15,14 +15,29 @@ public class Player {
 
     
 
-    public Player() {
+    public Player(String name) {
+        this.name = name;
         attacks = new ArrayList<>();
+        deck = new ArrayList<>();
+        hand = new ArrayList<>();
+        discard = new ArrayList<>();
+        for (int i = 0; i < 7; i++){
+            addCard(1);
+        }
+        for (int i = 0; i < 3; i++){
+            addCard(4);
+        }
+        draw(5);
     }
 
     public void takeTurn() {
         resolveAttacks();
+        actionPhase();
+        buyPhase();
+        cleanupPhase();
     }
 
+    // Attacks
     public void resolveAttacks() {
         boolean moat = false;
         for(Card c : hand){
@@ -42,7 +57,6 @@ public class Player {
     // 3 = Bandit
     // 4 = Witch
     // 5 = Council Room
-
     public void doImpact(int attackID) {
         switch (attackID) {
             case 1:
@@ -62,29 +76,62 @@ public class Player {
         }
     }
 
-    public void draw(int i) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'draw'");
-    }
-
-    public void addCard(int i) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addCard'");
-    }
-
-    // Special Attacks
     public void resolveBandit() {
-        // TODO Auto-generated method stub
+        // TODO
         throw new UnsupportedOperationException("Unimplemented method 'resolveBandit'");
     }
 
     public void resolveBureaucrat() {
-        // TODO Auto-generated method stub
+        // TODO
         throw new UnsupportedOperationException("Unimplemented method 'resolveBureaucrat'");
     }
 
     public void resolveMilitia() {
-        // TODO Auto-generated method stub
+        // TODO
         throw new UnsupportedOperationException("Unimplemented method 'resolveMillitia'");
+    }
+
+    // Actions
+    public void actionPhase(){
+        // TODO
+        throw new UnsupportedOperationException("Unimplemented method 'actionPhase'");
+    }
+
+    //Buys
+    public void buyPhase() {
+        // TODO
+        throw new UnsupportedOperationException("Unimplemented method 'buyPhase'");
+    }
+
+    // Clean Up
+    public void cleanupPhase() {
+        // TODO
+        throw new UnsupportedOperationException("Unimplemented method 'cleanupPhase'");
+    }
+
+    // Deck management methods
+    public void draw(int i) {
+        // TODO
+        throw new UnsupportedOperationException("Unimplemented method 'draw'");
+    }
+
+    public void addCard(int i) {
+        // TODO
+        throw new UnsupportedOperationException("Unimplemented method 'addCard'");
+    }
+
+    public void discard(int i) {
+        // TODO
+        throw new UnsupportedOperationException("Unimplemented method 'discard'");
+    }
+
+    public void discardChoice(int i, boolean optional) {
+        // TODO
+        throw new UnsupportedOperationException("Unimplemented method 'discardChoice'");
+    }
+
+    public void shuffle() {
+        // TODO
+        throw new UnsupportedOperationException("Unimplemented method 'shuffle'");
     }
 }
