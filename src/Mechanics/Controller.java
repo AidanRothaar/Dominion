@@ -8,14 +8,27 @@ public class Controller {
     private boolean gameOver;
     private List<Player> players;
     private Board board;
-
-
+    private List<Integer> attacksToAdd;
+    
+    
     public Controller() {
         gameOver = false;
     }
 
     public void runGame() {
         runSetup();
+        int turn = 0;
+        while (!gameOver) {
+            if(turn > players.size() - 1) {
+                turn = 0;
+            }
+            attacksToAdd = players.get(turn).takeTurn();
+            for (int i = 0; i <= players.size(); i++) {
+                if (i != turn) {
+                    players.get(i).addAttacks(attacksToAdd);
+                }
+            }
+        }
     }
 
     public void runSetup() {

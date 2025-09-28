@@ -9,14 +9,16 @@ public class Player {
     int buys;
     int coins;
     private List<Integer> attacks;
-    private List <Card> hand;
-    private List <Card> deck;
-    private List <Card> discard;
+    private List<Card> hand;
+    private List<Card> deck;
+    private List<Card> discard;
+    private List<Integer> outgoingAttacks;
 
     
 
     public Player(String name) {
         this.name = name;
+        outgoingAttacks = new ArrayList<>();
         attacks = new ArrayList<>();
         deck = new ArrayList<>();
         hand = new ArrayList<>();
@@ -30,14 +32,27 @@ public class Player {
         draw(5);
     }
 
-    public void takeTurn() {
+    public List<Integer> takeTurn() {
+        turnSetup();
         resolveAttacks();
         actionPhase();
         buyPhase();
-        cleanupPhase();
+        cleanupPhase(); 
+        return outgoingAttacks;
+    }
+
+    // Turn Setup
+    public void turnSetup() {
+
     }
 
     // Attacks
+    public void addAttacks(List<Integer> attack) {
+        for (int i : attack) {
+            attacks.add(i);
+        }
+    }
+
     public void resolveAttacks() {
         boolean moat = false;
         for(Card c : hand){
@@ -50,6 +65,7 @@ public class Player {
                 doImpact(i);
             }
         }
+        attacks.clear();
     }
 
     // 1 = Millitia
