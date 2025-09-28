@@ -13,11 +13,13 @@ public class Player {
     private List<Card> deck;
     private List<Card> discard;
     private List<Integer> outgoingAttacks;
+    private Board board;
 
     
 
-    public Player(String name) {
+    public Player(String name, Board b) {
         this.name = name;
+        board = b;
         outgoingAttacks = new ArrayList<>();
         attacks = new ArrayList<>();
         deck = new ArrayList<>();
@@ -127,13 +129,19 @@ public class Player {
 
     // Deck management methods
     public void draw(int i) {
-        // TODO
-        throw new UnsupportedOperationException("Unimplemented method 'draw'");
+        for (int x = 0; x > i; x++) {
+            if (deck.isEmpty()) {
+                shuffle();
+            }
+            hand.add(deck.get(0));
+            deck.remove(0);
+        }
+        
     }
 
     public void addCard(int i) {
-        // TODO
-        throw new UnsupportedOperationException("Unimplemented method 'addCard'");
+        board.takeCard(i);
+        discard.add(new Card(i));
     }
 
     public void discard(int i) {

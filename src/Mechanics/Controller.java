@@ -33,19 +33,15 @@ public class Controller {
 
     public void runSetup() {
         Scanner input = new Scanner(System.in);
+        int numPlayers = input.nextInt();
+        board = new Board(numPlayers);
         players = new ArrayList<>();
         boolean cont = true;
-        do {
+        for (int i = 0; i < numPlayers; i++) {
             System.out.println("Input player name");
-            players.add(new Player(input.nextLine()));
-            if (players.size() >= 2) {
-                System.out.println("Would you like to add another player? y/n");
-                if (input.nextLine().toUpperCase() == "N") {
-                    cont = false;
-                }
-            }
-        } while(cont);
+            players.add(new Player(input.nextLine(), board));
+        }
         input.close();
-        board = new Board(players.size());
+       
     }
 }
