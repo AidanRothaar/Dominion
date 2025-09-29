@@ -73,4 +73,8 @@ public class Board {
         return false;
     }
 
+    public List<Card> getCardList() {
+        return cardList;
+    }
+
 }

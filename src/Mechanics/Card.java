@@ -2,6 +2,7 @@ package Mechanics;
 
 public class Card {
     private String name;
+    private int id;
     private int type;
     // 1 = treasure
     // 2 = victory
@@ -15,6 +16,7 @@ public class Card {
     private boolean specialEffect;
 
     public Card(int i) {
+        id = i;
         switch(i) {
             case 1:
                 name = "Copper";
@@ -168,6 +170,10 @@ public class Card {
 
     public boolean hasEffect() {
         return specialEffect;
+    }
+
+    public int getID() {
+        return id;
     }
 
 }

@@ -2,6 +2,7 @@ package Mechanics;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import Exceptions.BrokeException;
 
@@ -16,6 +17,7 @@ public class Player {
     private List<Card> discard;
     private List<Integer> outgoingAttacks;
     private Board board;
+    private Scanner input;
 
     
 
@@ -23,6 +25,7 @@ public class Player {
         this.name = name;
         board = b;
         coins = 6;
+        input = new Scanner(System.in);
         outgoingAttacks = new ArrayList<>();
         attacks = new ArrayList<>();
         deck = new ArrayList<>();
@@ -51,6 +54,7 @@ public class Player {
         actions = 1;
         buys = 1;
         coins = 0;
+        
     }
 
     // Attacks
@@ -133,8 +137,24 @@ public class Player {
 
     //Buys
     private void buyPhase() {
-        // TODO
-        throw new UnsupportedOperationException("Unimplemented method 'buyPhase'");
+        while (buys > 0) {
+            System.out.println("You have "+ buys + " buys. Would you like to buy another card? y/n");
+            String answer = input.nextLine();
+            if (answer.toLowerCase() == "y") {
+                System.out.println("You have " + coins + " coins to spend");
+                for (Card c : board.getCardList()) {
+                    System.out.println(c.getName()+ " costs " + c.getCost() + " ID: " + c.getID());
+                }
+                System.out.println("Which card would you like to buy? (type the id)");
+                int idToBuy = input.nextInt();
+                if (addCard(idToBuy)) {
+                    buys -= 1;
+                } else {
+                    System.out.println("You dont have enough money");
+                }
+            }
+
+        }
     }
 
     // Clean Up
@@ -155,17 +175,19 @@ public class Player {
         
     }
 
-    private void addCard(int i) {
+    private boolean addCard(int i) {
         try {
             board.takeCard(i, coins);
         } catch(BrokeException e) {
-            System.out.println("Error");
+            return false;
         }
         Card newCard = new Card(i);
+        coins -= newCard.getCost();
         discard.add(newCard);
+        return true;
     }
 
-    private void discard(int i, boolean optional) {
+    private void discard(int i) {
         // TODO
         throw new UnsupportedOperationException("Unimplemented method 'discard'");
     }
