@@ -2,6 +2,7 @@ package Mechanics;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 import Exceptions.BrokeException;
@@ -14,6 +15,7 @@ public class Player {
     private List<Integer> attacks;
     private List<Card> hand;
     private List<Card> deck;
+    private List<Card> boardCards;
     private List<Card> discard;
     private List<Integer> outgoingAttacks;
     private Board board;
@@ -126,7 +128,7 @@ public class Player {
     }
 
     private void resolveMilitia() {
-        discard(hand.size() - 3, false);
+        discard(hand.size() - 3);
     }
 
     // Actions
@@ -159,8 +161,12 @@ public class Player {
 
     // Clean Up
     private void cleanupPhase() {
-        // TODO
-        throw new UnsupportedOperationException("Unimplemented method 'cleanupPhase'");
+        discard(hand.size());
+        for (Card c : boardCards) {
+            discard.add(c);
+            boardCards.remove(c);
+        }
+        draw(5);
     }
 
     // Deck management methods
@@ -193,8 +199,14 @@ public class Player {
     }
 
     private void shuffle() {
-        // TODO
-        throw new UnsupportedOperationException("Unimplemented method 'shuffle'");
+        Random rand = new Random();
+        int randInt;
+        while(discard.size() > 0) {
+            randInt = rand.nextInt(discard.size());
+            Card c = discard.get(randInt);
+            deck.add(c);
+            discard.remove(randInt);
+        }
     }
 
     // Player management methods
