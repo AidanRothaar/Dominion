@@ -28,7 +28,20 @@ public class Controller {
                     players.get(i).addAttacks(attacksToAdd);
                 }
             }
+            if (board.isGameOver()) {
+                gameOver = true;
+            }
         }
+        int maxVP = 0;
+        Player winner = null;
+        for (Player p : players) {
+            if (p.getVP() > maxVP) {
+                maxVP = p.getVP();
+                winner = p;
+            }
+            System.out.println("Player " + p.getName() + " had " + p.getVP() + " Victory Points");
+        }
+        System.out.println("Player " + winner.getName() + " won with " + maxVP + " Victory Points");
     }
 
     public void runSetup() {

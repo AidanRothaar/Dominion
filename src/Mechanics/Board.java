@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import Exceptions.WrongCardException;
+
 public class Board {
     private int[][] cards;
     private int numPlayers;
@@ -45,13 +47,27 @@ public class Board {
         }
     }
 
-    public void takeCard(int i) {
+    public void takeCard(int i) throws WrongCardException {
         for (int num = 0; i < 17; i++){
             if (cards[num][0] == i) {
                 cards[num][1] -= 1;
                 return;
             }
         }
+        throw new WrongCardException();
+    }
+
+    public boolean isGameOver() {
+        int emptyPiles = 0;
+        for (int i = 0; i < 17; i++) {
+            if (cards[i][1] == 0) {
+                emptyPiles += 1;
+            }
+        }
+        if (emptyPiles >= 3 || cards[5][1] == 0) {
+            return true;
+        }
+        return false;
     }
 
 }

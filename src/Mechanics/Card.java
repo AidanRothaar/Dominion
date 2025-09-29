@@ -119,4 +119,16 @@ public class Card {
     public String getName() {
         return name;
     }
+
+    public int getType() {
+        return type;
+    }
+
+    public int getVP(int Decksize) {
+        if (this.name == "Garden") {
+            return Decksize/10;
+        }
+        return victory;
+    }
+
 }

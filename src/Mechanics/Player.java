@@ -3,11 +3,13 @@ package Mechanics;
 import java.util.ArrayList;
 import java.util.List;
 
+import Exceptions.WrongCardException;
+
 public class Player {
     private String name;
-    int actions;
-    int buys;
-    int coins;
+    private int actions;
+    private int buys;
+    private int coins;
     private List<Integer> attacks;
     private List<Card> hand;
     private List<Card> deck;
@@ -140,8 +142,13 @@ public class Player {
     }
 
     public void addCard(int i) {
-        board.takeCard(i);
-        discard.add(new Card(i));
+        try {
+            board.takeCard(i);
+        } catch(WrongCardException e) {
+            System.out.println("Error");
+        }
+        Card newCard = new Card(i);
+        discard.add(newCard);
     }
 
     public void discard(int i) {
@@ -157,5 +164,26 @@ public class Player {
     public void shuffle() {
         // TODO
         throw new UnsupportedOperationException("Unimplemented method 'shuffle'");
+    }
+
+    // Player management methods
+    public String getName() {
+        return name;
+    }
+
+    public int getVP() {
+        int victoryPoints = 0;
+        for (Card c : hand) {
+            discard.add(c);
+        }
+        for (Card c : deck) {
+            discard.add(c);
+        }
+        for (Card c : discard) {
+            if (c.getType() == 2) {
+                victoryPoints += c.getVP(discard.size());
+            }
+        }
+        return victoryPoints;
     }
 }
