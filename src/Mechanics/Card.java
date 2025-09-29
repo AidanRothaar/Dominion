@@ -131,4 +131,8 @@ public class Card {
         return victory;
     }
 
+    public int getCoins() {
+        return coins;
+    }
+
 }

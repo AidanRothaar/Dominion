@@ -46,8 +46,10 @@ public class Player {
     }
 
     // Turn Setup
-    public void turnSetup() {
-
+    private void turnSetup() {
+        actions = 1;
+        buys = 1;
+        coins = 0;
     }
 
     // Attacks
@@ -57,7 +59,7 @@ public class Player {
         }
     }
 
-    public void resolveAttacks() {
+    private void resolveAttacks() {
         boolean moat = false;
         for(Card c : hand){
             if (c.getName() == "Moat") {
@@ -77,7 +79,7 @@ public class Player {
     // 3 = Bandit
     // 4 = Witch
     // 5 = Council Room
-    public void doImpact(int attackID) {
+    private void doImpact(int attackID) {
         switch (attackID) {
             case 1:
                 this.resolveMilitia();
@@ -96,41 +98,52 @@ public class Player {
         }
     }
 
-    public void resolveBandit() {
-        // TODO
-        throw new UnsupportedOperationException("Unimplemented method 'resolveBandit'");
+    private void resolveBandit() {
+        if (deck.size() < 2) {
+            shuffle();
+        }
+
+        if (deck.get(0).getType() == 1 && deck.get(0).getCoins() > 1 && deck.size() > 0) {
+            deck.remove(0);
+        } else if (deck.get(1).getType() == 1 && deck.get(1).getCoins() > 1 && deck.size() > 1){
+            deck.remove(1);
+        }
     }
 
-    public void resolveBureaucrat() {
-        // TODO
-        throw new UnsupportedOperationException("Unimplemented method 'resolveBureaucrat'");
+    private void resolveBureaucrat() {
+        for (Card c : hand) {
+            if (c.getType() == 2) {
+                deck.add(0, c);
+                hand.remove(c);
+                return;
+            }
+        }
     }
 
-    public void resolveMilitia() {
-        // TODO
-        throw new UnsupportedOperationException("Unimplemented method 'resolveMillitia'");
+    private void resolveMilitia() {
+        discard(hand.size() - 3, false);
     }
 
     // Actions
-    public void actionPhase(){
+    private void actionPhase(){
         // TODO
         throw new UnsupportedOperationException("Unimplemented method 'actionPhase'");
     }
 
     //Buys
-    public void buyPhase() {
+    private void buyPhase() {
         // TODO
         throw new UnsupportedOperationException("Unimplemented method 'buyPhase'");
     }
 
     // Clean Up
-    public void cleanupPhase() {
+    private void cleanupPhase() {
         // TODO
         throw new UnsupportedOperationException("Unimplemented method 'cleanupPhase'");
     }
 
     // Deck management methods
-    public void draw(int i) {
+    private void draw(int i) {
         for (int x = 0; x > i; x++) {
             if (deck.isEmpty()) {
                 shuffle();
@@ -141,7 +154,7 @@ public class Player {
         
     }
 
-    public void addCard(int i) {
+    private void addCard(int i) {
         try {
             board.takeCard(i);
         } catch(WrongCardException e) {
@@ -151,17 +164,12 @@ public class Player {
         discard.add(newCard);
     }
 
-    public void discard(int i) {
+    private void discard(int i, boolean optional) {
         // TODO
         throw new UnsupportedOperationException("Unimplemented method 'discard'");
     }
 
-    public void discardChoice(int i, boolean optional) {
-        // TODO
-        throw new UnsupportedOperationException("Unimplemented method 'discardChoice'");
-    }
-
-    public void shuffle() {
+    private void shuffle() {
         // TODO
         throw new UnsupportedOperationException("Unimplemented method 'shuffle'");
     }
