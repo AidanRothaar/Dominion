@@ -9,7 +9,6 @@ import Exceptions.WrongCardException;
 public class Board {
     private int[][] cards;
     private int numPlayers;
-    private int[] cardNumList;
 
     public Board(int i) {
         numPlayers = i;
