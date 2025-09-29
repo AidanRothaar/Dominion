@@ -3,7 +3,7 @@ package Mechanics;
 import java.util.ArrayList;
 import java.util.List;
 
-import Exceptions.WrongCardException;
+import Exceptions.BrokeException;
 
 public class Player {
     private String name;
@@ -22,6 +22,7 @@ public class Player {
     public Player(String name, Board b) {
         this.name = name;
         board = b;
+        coins = 6;
         outgoingAttacks = new ArrayList<>();
         attacks = new ArrayList<>();
         deck = new ArrayList<>();
@@ -156,8 +157,8 @@ public class Player {
 
     private void addCard(int i) {
         try {
-            board.takeCard(i);
-        } catch(WrongCardException e) {
+            board.takeCard(i, coins);
+        } catch(BrokeException e) {
             System.out.println("Error");
         }
         Card newCard = new Card(i);

@@ -49,7 +49,6 @@ public class Controller {
         int numPlayers = input.nextInt();
         board = new Board(numPlayers);
         players = new ArrayList<>();
-        boolean cont = true;
         for (int i = 0; i < numPlayers; i++) {
             String name = "Player " + (i+1);
             players.add(new Player(name, board));

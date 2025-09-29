@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import Exceptions.WrongCardException;
+import Exceptions.BrokeException;
 
 public class Board {
     private int[][] cards;
     private int numPlayers;
+    private List<Card> cardList;
 
     public Board(int i) {
         numPlayers = i;
         cards = new int[17][2];
+        cardList = new ArrayList<>();
         addGuarenteedCards();
         addKingdomCards();
     }
@@ -20,6 +22,7 @@ public class Board {
     private void addGuarenteedCards() {
         for (int i = 1; i <= 7; i++)  {
             cards[i-1][0] = i;
+            cardList.add(new Card(i));
             if (i < 4) {
                 cards[i-1][1] = 60;
             } else if (i < 7 && numPlayers == 2) {
@@ -41,19 +44,20 @@ public class Board {
             Random rand = new Random();
             int num = rand.nextInt(cardOptions.size());
             cards[7+i][0] = cardOptions.get(num);
+            cardList.add(new Card(cardOptions.get(num)));
             cardOptions.remove(num);
             cards[7+i][1] = 10;
         }
     }
 
-    public void takeCard(int i) throws WrongCardException {
+    public int takeCard(int i, int coins) throws BrokeException {
         for (int num = 0; i < 17; i++){
-            if (cards[num][0] == i) {
+            if (cards[num][0] == i && cardList.get(num).getCost() <= coins) {
                 cards[num][1] -= 1;
-                return;
+                return coins - cardList.get(num).getCost();
             }
         }
-        throw new WrongCardException();
+        throw new BrokeException();
     }
 
     public boolean isGameOver() {

@@ -9,6 +9,7 @@ public class Card {
     private int draw;
     private int actions;
     private int coins;
+    private int buys;
     private int cost;
     private int victory;
     private boolean specialEffect;
@@ -21,6 +22,7 @@ public class Card {
                 draw = 0;
                 actions = 0;
                 coins = 1;
+                buys = 0;
                 cost = 0;
                 victory = 0;
                 specialEffect = false;
@@ -31,6 +33,7 @@ public class Card {
                 draw = 0;
                 actions = 0;
                 coins = 2;
+                buys = 0;
                 cost = 3;
                 victory = 0;
                 specialEffect = false;
@@ -41,6 +44,7 @@ public class Card {
                 draw = 0;
                 actions = 0;
                 coins = 3;
+                buys = 0;
                 cost = 6;
                 victory = 0;
                 specialEffect = false;
@@ -51,6 +55,7 @@ public class Card {
                 draw = 0;
                 actions = 0;
                 coins = 0;
+                buys = 0;
                 cost = 2;
                 victory = 1;
                 specialEffect = false;
@@ -61,6 +66,7 @@ public class Card {
                 draw = 0;
                 actions = 0;
                 coins = 0;
+                buys = 0;
                 cost = 5;
                 victory = 3;
                 specialEffect = false;
@@ -71,6 +77,7 @@ public class Card {
                 draw = 0;
                 actions = 0;
                 coins = 0;
+                buys = 0;
                 cost = 8;
                 victory = 6;
                 specialEffect = false;
@@ -81,6 +88,8 @@ public class Card {
                 draw = 0;
                 actions = 0;
                 coins = 0;
+                buys = 0;
+                cost = 0;
                 victory = -1;
                 specialEffect = false;
                 break;
@@ -90,6 +99,8 @@ public class Card {
                 draw = 0;
                 actions = 1;
                 coins = 0;
+                buys = 0;
+                cost = 2;
                 victory = 0;
                 specialEffect = true;
                 break;
@@ -99,6 +110,8 @@ public class Card {
                 draw = 0;
                 actions = 0;
                 coins = 0;
+                buys = 0;
+                cost = 2;
                 victory = 0;
                 specialEffect = true;
                 break;
@@ -108,8 +121,10 @@ public class Card {
                 draw = 0;
                 actions = 1;
                 coins = 0;
+                buys = 0;
+                cost = 2;
                 victory = 0;
-                specialEffect = false; // Will be implemented in resolveAttacks
+                specialEffect = false;
                 break;
             //TODO add other cards
                 
@@ -133,6 +148,26 @@ public class Card {
 
     public int getCoins() {
         return coins;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public int getActions() {
+        return actions;
+    }
+    
+    public int getBuys() {
+        return buys;
+    }
+
+    public int getDraw() {
+        return draw;
+    }
+
+    public boolean hasEffect() {
+        return specialEffect;
     }
 
 }
