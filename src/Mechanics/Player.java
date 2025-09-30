@@ -194,7 +194,14 @@ public class Player {
     }
 
     private void discard(int i) {
-        // TODO
+        if (i >= hand.size()) {
+            for (Card c : hand) {
+                discard.add(c);
+                hand.remove(c);
+            }
+        }
+
+        // TODO add discard with choice
         throw new UnsupportedOperationException("Unimplemented method 'discard'");
     }
 
