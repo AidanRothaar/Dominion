@@ -128,6 +128,61 @@ public class Card {
                 victory = 0;
                 specialEffect = false;
                 break;
+            case 11:
+                name = "Harbinger";
+                type = 3;
+                draw = 1;
+                actions = 1;
+                coins = 0;
+                buys = 0;
+                cost = 3;
+                victory = 0;
+                specialEffect = true;
+                break;
+            case 12:
+                name = "Merchant";
+                type = 3;
+                draw = 1;
+                actions = 1;
+                coins = 0;
+                buys = 0;
+                cost = 3;
+                victory = 0;
+                specialEffect = true;
+                break;
+            case 13:
+                name = "Vassal";
+                type = 3;
+                draw = 0;
+                actions = 0;
+                coins = 2;
+                buys = 0;
+                cost = 3;
+                victory = 0;
+                specialEffect = true;
+                break;
+            case 14:
+                name = "Village";
+                type = 3;
+                draw = 1;
+                actions = 2;
+                coins = 0;
+                buys = 0;
+                cost = 3;
+                victory = 0;
+                specialEffect = false;
+                break;
+            case 15:
+                name = "Workshop";
+                type = 3;
+                draw = 0;
+                actions = 0;
+                coins = 0;
+                buys = 0;
+                cost = 3;
+                victory = 0;
+                specialEffect = true;
+                break;
             //TODO add other cards
                 
         }

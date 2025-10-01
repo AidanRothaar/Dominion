@@ -137,6 +137,43 @@ public class Player {
         throw new UnsupportedOperationException("Unimplemented method 'actionPhase'");
     }
 
+    private void cellar() {
+        // TODO
+        // User can discard any number of cards of their choice they then draw that many cards
+    }
+
+    private void chapel() {
+        // TODO
+        // User can choose up to 4 cards from their hand to permanantly remove from their deck
+    }
+
+    private void harbinger() {
+        // TODO
+        // Lets the User choose a card from the discard and puts it on top of the deck. 
+        // If the discard is empty does nothing. 
+        // User can decline
+    }
+
+    private void merchant() {
+        // TODO 
+        // if the user plays a silver add +1 coin
+    }
+
+    private void vassal() {
+        // TODO
+        // if the top card of the deck is an action card the user may play it or discard it
+        // otherwise discard it
+    }
+
+    private void workshop() {
+        // TODO
+        // add a card costing 4 or less into the discard 
+        // remove it from the supply pile
+    }
+
+    
+
+
     //Buys
     private void buyPhase() {
         while (buys > 0) {
