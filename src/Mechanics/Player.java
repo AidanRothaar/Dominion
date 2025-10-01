@@ -12,6 +12,7 @@ public class Player {
     private int actions;
     private int buys;
     private int coins;
+    private int merchants;
     private List<Integer> attacks;
     private List<Card> hand;
     private List<Card> deck;
@@ -56,7 +57,7 @@ public class Player {
         actions = 1;
         buys = 1;
         coins = 0;
-        
+        merchants = 0;
     }
 
     // Attacks
@@ -137,6 +138,29 @@ public class Player {
         throw new UnsupportedOperationException("Unimplemented method 'actionPhase'");
     }
 
+    private void doSpecialEffect(int i) {
+        switch (i) {
+            case 8:
+                cellar();
+                break;
+            case 9:
+                chapel();
+                break;
+            case 11:
+                harbinger();
+                break;
+            case 12:
+                merchant();
+                break;
+            case 13:
+                vassal();
+                break;
+            case 15:
+                workshop();
+                break;
+        }
+    }
+
     private void cellar() {
         // TODO
         // User can discard any number of cards of their choice they then draw that many cards
@@ -155,8 +179,7 @@ public class Player {
     }
 
     private void merchant() {
-        // TODO 
-        // if the user plays a silver add +1 coin
+        merchants++;
     }
 
     private void vassal() {
@@ -171,16 +194,25 @@ public class Player {
         // remove it from the supply pile
     }
 
-    
+
 
 
     //Buys
     private void buyPhase() {
+        for (Card c : hand) {
+            if (c.getType() == 1) {
+                int val = c.getCoins();
+                if (val == 2) {
+                    coins += merchants;
+                    merchants = 0;
+                }
+                coins += val;
+            }
+        }
         while (buys > 0) {
-            System.out.println("You have "+ buys + " buys. Would you like to buy another card? y/n");
+            System.out.println("You have "+ buys + " buys and " + coins + " coins to spend. Would you like to buy another card? y/n");
             String answer = input.nextLine();
             if (answer.toLowerCase() == "y") {
-                System.out.println("You have " + coins + " coins to spend");
                 for (Card c : board.getCardList()) {
                     System.out.println(c.getName()+ " costs " + c.getCost() + " ID: " + c.getID());
                 }
