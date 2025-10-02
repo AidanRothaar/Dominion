@@ -54,7 +54,7 @@ public class Board {
     public int takeCard(int i, int coins) throws BrokeException, InvalidIDException {
         boolean idExists = false;
         for(int num = 0; num < 17; num++) {
-            if (cards[num][0] == i) {
+            if (cards[num][0] == i && cards[num][1] > 0) {
                 idExists = true;
             }
         }

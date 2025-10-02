@@ -57,7 +57,7 @@ public class Player {
 
     // Turn Setup
     private void turnSetup() {
-        System.out.println(name + "turn");
+        System.out.println(name + " turn");
         actions = 1;
         buys = 1;
         coins = 0;
@@ -263,6 +263,7 @@ public class Player {
                 int idToBuy = input.nextInt();
                 if (addCard(idToBuy)) {
                     buys -= 1;
+                    System.out.println("You purchased " + discard.get(discard.size()-1).getName());
                 } 
             } else {
                 buys = 0;
@@ -360,6 +361,7 @@ public class Player {
         while (true) {
             try {
                 int i = input.nextInt();
+                input.nextLine();
                 return i;
             } catch (NoSuchElementException e) {
                 System.out.println("Please enter a valid integer.");
