@@ -23,7 +23,7 @@ public class Controller {
                 turn = 0;
             }
             attacksToAdd = players.get(turn).takeTurn();
-            for (int i = 0; i <= players.size(); i++) {
+            for (int i = 0; i < players.size(); i++) {
                 if (i != turn) {
                     players.get(i).addAttacks(attacksToAdd);
                 }
@@ -31,6 +31,7 @@ public class Controller {
             if (board.isGameOver()) {
                 gameOver = true;
             }
+            turn++;
         }
         int maxVP = 0;
         Player winner = null;
@@ -42,18 +43,19 @@ public class Controller {
             System.out.println("Player " + p.getName() + " had " + p.getVP() + " Victory Points");
         }
         System.out.println("Player " + winner.getName() + " won with " + maxVP + " Victory Points");
+        
     }
 
     public void runSetup() {
         Scanner input = new Scanner(System.in);
         int numPlayers = input.nextInt();
+        input.nextLine();
         board = new Board(numPlayers);
         players = new ArrayList<>();
         for (int i = 0; i < numPlayers; i++) {
             String name = "Player " + (i+1);
             players.add(new Player(name, board));
         }
-        input.close();
        
     }
 }

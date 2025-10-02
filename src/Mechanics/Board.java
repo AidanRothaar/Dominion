@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import Exceptions.BrokeException;
+import Exceptions.InvalidIDException;
 
 public class Board {
     private int[][] cards;
@@ -50,10 +51,27 @@ public class Board {
         }
     }
 
-    public int takeCard(int i, int coins) throws BrokeException {
-        for (int num = 0; i < 17; i++){
+    public int takeCard(int i, int coins) throws BrokeException, InvalidIDException {
+        boolean idExists = false;
+        for(int num = 0; num < 17; num++) {
+            if (cards[num][0] == i) {
+                idExists = true;
+            }
+        }
+        if(!idExists) {
+            throw new InvalidIDException();
+        }
+        for (int num = 0; num < 17; num++){
             if (cards[num][0] == i && cardList.get(num).getCost() <= coins) {
                 cards[num][1] -= 1;
+                if (cards[num][1] == 0) {
+                    for (Card c : cardList) {
+                        if (c.getID() == i) {
+                            cardList.remove(c);
+                            break;
+                        }
+                    }
+                }
                 return coins - cardList.get(num).getCost();
             }
         }

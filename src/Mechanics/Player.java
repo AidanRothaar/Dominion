@@ -2,10 +2,12 @@ package Mechanics;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Scanner;
 
 import Exceptions.BrokeException;
+import Exceptions.InvalidIDException;
 
 public class Player {
     private String name;
@@ -34,6 +36,7 @@ public class Player {
         deck = new ArrayList<>();
         hand = new ArrayList<>();
         discard = new ArrayList<>();
+        boardCards = new ArrayList<>();
         for (int i = 0; i < 7; i++){
             addCard(1);
         }
@@ -54,6 +57,7 @@ public class Player {
 
     // Turn Setup
     private void turnSetup() {
+        System.out.println(name + "turn");
         actions = 1;
         buys = 1;
         coins = 0;
@@ -134,8 +138,47 @@ public class Player {
 
     // Actions
     private void actionPhase(){
-        // TODO
-        throw new UnsupportedOperationException("Unimplemented method 'actionPhase'");
+        boolean hasAction;
+        while (actions > 0) {
+            int count = 1;
+            hasAction = false;
+            for (Card c : hand) {
+                System.out.println(count + ". " + c.getName());
+                if (c.getType() == 3) {
+                    hasAction = true;
+                }
+                count++;
+            }
+            if (hasAction) {
+                System.out.println("You have " + actions + " actions");
+                System.out.println("Which card would you like to play?");
+                int cardtoplay = getInt();
+                playcard(cardtoplay - 1);
+            } else {
+                System.out.println("You have no action cards");
+                actions = 0;
+            }
+        }
+    }
+
+    private void playcard(int i) {
+        Card c = hand.get(i);
+        if (c.getType() != 3) {
+            System.out.println("This is not an action card");
+            return;
+        }
+        actions--;
+        actions += c.getActions();
+        buys += c.getBuys();
+        coins += c.getCoins();
+        if (c.hasEffect() == true) {
+            doSpecialEffect(c.getID());
+        }
+        if (c.getDraw() > 0) {
+            draw(c.getDraw());
+        }
+        boardCards.add(c);
+        hand.remove(c);
     }
 
     private void doSpecialEffect(int i) {
@@ -211,8 +254,8 @@ public class Player {
         }
         while (buys > 0) {
             System.out.println("You have "+ buys + " buys and " + coins + " coins to spend. Would you like to buy another card? y/n");
-            String answer = input.nextLine();
-            if (answer.toLowerCase() == "y") {
+            String answer = getLine();
+            if (answer.toLowerCase().equals("y")) {
                 for (Card c : board.getCardList()) {
                     System.out.println(c.getName()+ " costs " + c.getCost() + " ID: " + c.getID());
                 }
@@ -220,9 +263,9 @@ public class Player {
                 int idToBuy = input.nextInt();
                 if (addCard(idToBuy)) {
                     buys -= 1;
-                } else {
-                    System.out.println("You dont have enough money");
-                }
+                } 
+            } else {
+                buys = 0;
             }
 
         }
@@ -231,16 +274,18 @@ public class Player {
     // Clean Up
     private void cleanupPhase() {
         discard(hand.size());
-        for (Card c : boardCards) {
-            discard.add(c);
-            boardCards.remove(c);
+        if (boardCards.size() > 0){
+            for (Card c : boardCards) {
+                discard.add(c);
+            }
         }
+        boardCards.clear();
         draw(5);
     }
 
     // Deck management methods
     private void draw(int i) {
-        for (int x = 0; x > i; x++) {
+        for (int x = 0; x < i; x++) {
             if (deck.isEmpty()) {
                 shuffle();
             }
@@ -254,6 +299,10 @@ public class Player {
         try {
             board.takeCard(i, coins);
         } catch(BrokeException e) {
+            System.out.println("You dont have enough coins");
+            return false;
+        } catch(InvalidIDException e) {
+            System.out.println("That id is invalid");
             return false;
         }
         Card newCard = new Card(i);
@@ -266,8 +315,9 @@ public class Player {
         if (i >= hand.size()) {
             for (Card c : hand) {
                 discard.add(c);
-                hand.remove(c);
             }
+            hand.clear();
+            return;
         }
 
         // TODO add discard with choice
@@ -304,5 +354,28 @@ public class Player {
             }
         }
         return victoryPoints;
+    }
+
+    private int getInt() {
+        while (true) {
+            try {
+                int i = input.nextInt();
+                return i;
+            } catch (NoSuchElementException e) {
+                System.out.println("Please enter a valid integer.");
+                input.nextLine(); // Clear the invalid input
+            }
+        }
+    }
+    private String getLine() {
+        while (true) {
+            try {
+                String s = input.nextLine();
+                return s;
+            } catch (NoSuchElementException e) {
+                System.out.println("Please enter a valid line.");
+                input.nextLine();
+            }
+        }
     }
 }
