@@ -9,6 +9,7 @@ public class Controller {
     private List<Player> players;
     private Board board;
     private List<Integer> attacksToAdd;
+    private Scanner input;
     
     
     public Controller() {
@@ -43,11 +44,11 @@ public class Controller {
             System.out.println("Player " + p.getName() + " had " + p.getVP() + " Victory Points");
         }
         System.out.println("Player " + winner.getName() + " won with " + maxVP + " Victory Points");
-        
+        input.close();
     }
 
     public void runSetup() {
-        Scanner input = new Scanner(System.in);
+        input = new Scanner(System.in);
         int numPlayers = input.nextInt();
         input.nextLine();
         board = new Board(numPlayers);

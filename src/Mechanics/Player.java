@@ -201,6 +201,24 @@ public class Player {
             case 15:
                 workshop();
                 break;
+            case 16:
+                bureaucrat();
+                break;
+            case 18:
+                militia();
+                break;
+            case 19:
+                moneylender();
+                break;
+            case 20:
+                poacher();
+                break;
+            case 21:
+                remodel();
+                break;
+            case 23:
+                throneRoom();
+                break;
         }
     }
 
@@ -235,6 +253,36 @@ public class Player {
         // TODO
         // add a card costing 4 or less into the discard 
         // remove it from the supply pile
+    }
+
+    private void bureaucrat() {
+        // TODO
+        // add a card costing 4 or less into the discard 
+        // remove it from the supply pile
+    }
+
+    private void militia() {
+        outgoingAttacks.add(1);
+    }
+
+    private void moneylender() {
+        // TODO
+        // trashes a copper from the hand and adds +3 coins if no copper does nothing
+    }
+
+    private void poacher() {
+        // TODO
+        // discards one card per empty supply pile
+    }
+
+    private void remodel() {
+        // TODO
+        // Add a card worth 4 or less from a supply pile to the discard
+    }
+
+    private void throneRoom() {
+        // TODO 
+        // Choose an action card from your hand and execute it twice
     }
 
 
@@ -321,8 +369,18 @@ public class Player {
             return;
         }
 
-        // TODO add discard with choice
-        throw new UnsupportedOperationException("Unimplemented method 'discard'");
+        while (i > 0) {
+            int count = 1;
+            for (Card c : hand) {
+                System.out.println(count + ". " + c.getName());
+                count++;
+            }
+            System.out.println("Which card would you like to discard?");
+            int cardtodiscard = getInt();
+            discard.add(hand.get(cardtodiscard));
+            hand.remove(cardtodiscard);
+            i--;
+        }
     }
 
     private void shuffle() {

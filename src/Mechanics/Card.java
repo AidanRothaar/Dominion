@@ -183,6 +183,94 @@ public class Card {
                 victory = 0;
                 specialEffect = true;
                 break;
+            case 16:
+                name = "Bureaucrat";
+                type = 3;
+                draw = 0;
+                actions = 0;
+                coins = 0;
+                buys = 0;
+                cost = 4;
+                victory = 0;
+                specialEffect = true;
+                break;
+            case 17:
+                name = "Gardens";
+                type = 2;
+                draw = 0;
+                actions = 0;
+                coins = 0;
+                buys = 0;
+                cost = 4;
+                victory = 0;
+                specialEffect = false;
+                break;
+            case 18:
+                name = "Militia";
+                type = 3;
+                draw = 0;
+                actions = 0;
+                coins = 2;
+                buys = 0;
+                cost = 4;
+                victory = 0;
+                specialEffect = true;
+                break;
+            case 19:
+                name = "Moneylender";
+                type = 3;
+                draw = 0;
+                actions = 0;
+                coins = 0;
+                buys = 0;
+                cost = 4;
+                victory = 0;
+                specialEffect = true;
+                break;
+            case 20:
+                name = "Poacher";
+                type = 3;
+                draw = 1;
+                actions = 1;
+                coins = 1;
+                buys = 0;
+                cost = 4;
+                victory = 0;
+                specialEffect = true;
+                break;
+            case 21: 
+                name = "Remodel";
+                type = 3;
+                draw = 0;
+                actions = 0;
+                coins = 0;
+                buys = 0;
+                cost = 4;
+                victory = 0;
+                specialEffect = true;
+                break;
+            case 22:
+                name = "Smithy";
+                type = 3;
+                draw = 3;
+                actions = 0;
+                coins = 0;
+                buys = 0;
+                cost = 4;
+                victory = 0;
+                specialEffect = false;
+                break;
+            case 23:
+                name = "Throne Room";
+                type = 3;
+                draw = 0;
+                actions = 0;
+                coins = 0;
+                buys = 0;
+                cost = 4;
+                victory = 0;
+                specialEffect = true;
+                break;
             //TODO add other cards
                 
         }
